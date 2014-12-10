@@ -24,7 +24,11 @@ end
 default[:bamboo][:apache2][:access_log]         = ''
 default[:bamboo][:apache2][:error_log]          = ''
 default[:bamboo][:apache2][:port]               = 80
-default[:bamboo][:apache2][:virtual_host_alias] = node[:fqdn]
+if node[:platform] == 'amazon'
+  default[:bamboo][:apache2][:virtual_host_alias] = node[:machinename]
+else
+  default[:bamboo][:apache2][:virtual_host_alias] = node[:fqdn]
+end
 default[:bamboo][:apache2][:virtual_host_name]  = node[:hostname]
 default[:bamboo][:apache2][:error_docs][:e503]  = ''
 
